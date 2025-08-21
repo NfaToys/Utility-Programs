@@ -40,7 +40,7 @@ function testDrive {
 log "----------------------------------------------------"
 Log "Starting wake-up attempt for $DriveLetter"
 
-testDrive
+#testDrive
 
 for ($i = 1; $i -le $MaxAttempts; $i++) {
     if (Test-Path "$DriveLetter\") {
