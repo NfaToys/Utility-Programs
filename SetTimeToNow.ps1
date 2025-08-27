@@ -1,3 +1,6 @@
+<# This script opens a file open dialog, then sets then
+Modified Time of all selected files to NOW
+ #>
 Add-Type -AssemblyName System.Windows.Forms
 
 # Create and configure OpenFileDialog
