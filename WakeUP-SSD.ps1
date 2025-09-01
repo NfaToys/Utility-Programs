@@ -73,7 +73,7 @@ Log "Drive $DriveLetter failed to come online after $MaxAttempts attempts"
 exit 1
  #>
  
-$DriveLetters = @('E:', 'F:')
+$DriveLetters = @('E:', 'J:')
 $MaxAttempts = 20
 $DelaySeconds = 10
 $LogPath = "C:\temp\WakeDrive.log"
@@ -117,22 +117,6 @@ Function WakeDrive {
     for ($i = 1; $i -le $MaxAttempts; $i++) {
         if (Test-Path "$DriveLetter\") {
             Log "[$DriveLetter] Drive is online (attempt $i)"
-
-            $DestinationFolder = "$DriveLetter\WakeTestLogs"
-            $DestinationPath = Join-Path $DestinationFolder (Split-Path $LogPath -Leaf)
-
-            if (-not (Test-Path $DestinationFolder)) {
-                New-Item -Path $DestinationFolder -ItemType Directory -Force | Out-Null
-                Log "[$DriveLetter] Created folder $DestinationFolder"
-            }
-
-            try {
-                Copy-Item -Path $LogPath -Destination $DestinationPath -Force
-                Log "[$DriveLetter] Log file copied to $DestinationPath"
-            } catch {
-                Log "[$DriveLetter] Failed to copy log file: $_"
-            }
-
             TestDrive -DriveLetter $DriveLetter
             return
         } else {
